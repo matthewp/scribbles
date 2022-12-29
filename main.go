@@ -6,6 +6,7 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -27,8 +28,8 @@ func main() {
 	config.DataDir, _ = homedir.Expand(config.DataDir)
 	os.Mkdir(config.DataDir, 0700)
 
-	// logger config
-	log.SetPrefix("<> ")
+	// prevent weird error messages
+	log.SetOutput(ioutil.Discard)
 
 	// parse config
 	path := filepath.Join(config.DataDir, "config.json")

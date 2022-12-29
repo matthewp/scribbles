@@ -10,13 +10,17 @@ import (
 	"github.com/matthewp/scribbles/util"
 )
 
+const itemHeight = 6
+
 type item util.Event
 
 func (i item) FilterValue() string { return "" }
 
 type itemDelegate struct{}
 
-func (d itemDelegate) Height() int                               { return 1 }
+func (d itemDelegate) Height() int {
+	return itemHeight
+}
 func (d itemDelegate) Spacing() int                              { return 0 }
 func (d itemDelegate) Update(msg tea.Msg, m *list.Model) tea.Cmd { return nil }
 func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list.Item) {
@@ -26,6 +30,7 @@ func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list
 	}
 
 	str := printEvent(it.Event, &it.Nick, false)
+	//str = fmt.Sprintf("Item - %v", index)
 	if strings.TrimSpace(str) == "" {
 		str = "testing"
 	}

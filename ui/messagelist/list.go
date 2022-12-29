@@ -21,9 +21,10 @@ var (
 	itemStyle = lipgloss.NewStyle().
 			Foreground(lipgloss.Color("#FAFAFA")).
 			Background(lipgloss.AdaptiveColor{Light: "#874BFD", Dark: "#7D56F4"}).
-			Margin(1, 3, 0, 0).
+			Margin(1, 0, 0, 0).
 			Padding(1, 1).
-			Width(100)
+			Width(100).
+			Height(itemHeight).MaxHeight(itemHeight)
 	selectedItemStyle = itemStyle.Copy().
 				Background(lipgloss.Color("#E4BDFB")).
 				Foreground(lipgloss.Color("#2E2E2E"))
@@ -35,7 +36,7 @@ func New() Model {
 	items := []list.Item{}
 
 	const defaultWidth = 20
-	const listHeight = 10
+	const listHeight = 40
 
 	l := list.New(items, itemDelegate{}, defaultWidth, listHeight)
 	l.SetShowTitle(false)
